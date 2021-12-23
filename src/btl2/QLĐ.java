@@ -35,7 +35,7 @@ public class QLĐ extends javax.swing.JFrame {
     }
 public ArrayList<grade> getListGrade() {
         try {
-            String sql = "SELECT TOP 3 STUDENTS.MASV,HOTEN,TIENGANH,TINHOC,GDTC,(TIENGANH+TINHOC+GDTC)/3 AS TBM FROM STUDENTS JOIN GRADE\n"
+            String sql = "SELECT TOP 3 STUDENTS.MSV,HoTen,Mon,DiemTX,DiemGK,DiemCK,(TIENGANH+TINHOC+GDTC)/3 AS TBM FROM STUDENTS JOIN GRADE\n"
                     + " ON STUDENTS.MASV = GRADE.MASV ORDER BY TBM DESC";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
