@@ -1,4 +1,3 @@
-
 package btl2;
 
 import java.sql.Connection;
@@ -11,13 +10,13 @@ import java.util.Vector;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
 
-
 public class QLĐ extends javax.swing.JFrame {
+
     ArrayList<grade> list = new ArrayList<>();
     DefaultTableModel model;
     private Connection conn;
     int index = 0;
-    
+
     public QLĐ() {
         initComponents();
         setLocationRelativeTo(null);
@@ -31,7 +30,9 @@ public class QLĐ extends javax.swing.JFrame {
         }
         list = getListGrade();
         loadDbToTable();
-        loadDataToCbo()
+    
+
+    
     }
 public ArrayList<grade> getListGrade() {
         try {
@@ -47,7 +48,7 @@ public ArrayList<grade> getListGrade() {
                 sv.setDtx(Float.parseFloat(rs.getString("DiemTX")));
                 sv.setDgk(Float.parseFloat(rs.getString("DiemGK")));
                 sv.setDck(Float.parseFloat(rs.getString("DiemCK")));
-                
+
                 list.add(sv);
             }
         } catch (Exception e) {
@@ -61,11 +62,12 @@ public ArrayList<grade> getListGrade() {
         for (grade sv : list) {
             sv.msv = msv.getText();
             sv.fullname = fullName.getText();
-            Object row = new Object[]{sv.getMsv(),sv.getFullname(),sv.getMon(),sv.getDtx(),sv.getDgk(), sv.getDck(),sv.getAvg()};
+            Object row = new Object[]{sv.getMsv(), sv.getFullname(), sv.getMon(), sv.getDtx(), sv.getDgk(), sv.getDck(), sv.getAvg()};
             model.addRow((Vector<?>) row);
         }
     }
-     public void showDetail(int index) {
+
+    public void showDetail(int index) {
         fullName.setText(list.get(index).getFullname());
         msv.setText(list.get(index).getMsv());
         mon.setText(String.valueOf(list.get(index).getMon()));
@@ -74,21 +76,24 @@ public ArrayList<grade> getListGrade() {
         dck.setText(String.valueOf(list.get(index).getDck()));
         avg.setText(String.valueOf(list.get(index).getAvg()));
     }
-     public void loadDbToTable() {
-        try {
+
+    public void loadDbToTable() {
+         try {
             model.setRowCount(0);
-            String sql = "SELECT TOP 3 STUDENTS.MASV,HOTEN,TIENGANH,TINHOC,GDTC,(TIENGANH+TINHOC+GDTC)/3 AS TBM FROM STUDENTS JOIN GRADE\n"
-                    + " ON STUDENTS.MASV = GRADE.MASV ORDER BY TBM DESC";
+            String sql = "SELECT TOP 3 SV.MSV,HoTen,Mon,DiemTX,DiemGK,DiemCK,DiemTK AS TBM FROM SV JOIN DiemSV\n"
+                    + " ON SV.MSV = DiemSV.MSV ORDER BY TBM DESC";
+
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 Vector row = new Vector();
                 row.add(rs.getString("MSV"));
                 row.add(rs.getString("HoTen"));
-                row.add(Double.parseDouble(rs.getString("TIENGANH")));
-                row.add(Double.parseDouble(rs.getString("TINHOC")));
-                row.add(Double.parseDouble(rs.getString("GDTC")));
-                row.add(Double.parseDouble(rs.getString("TBM")));
+                row.add(rs.getString("Mon"));
+                row.add(Float.parseFloat(rs.getString("DiemTX")));
+                row.add(Float.parseFloat(rs.getString("DiemGK")));
+                row.add(Float.parseFloat(rs.getString("DiemCK")));
+                row.add(Float.parseFloat(rs.getString("DiemTK")));
                 model.addRow(row);
             }
             tblQLD.setModel(model);
@@ -96,6 +101,7 @@ public ArrayList<grade> getListGrade() {
             System.out.println(e);
         }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -153,8 +159,6 @@ public ArrayList<grade> getListGrade() {
         update.setText("Update");
 
         jLabel3.setText("Điểm trung bình");
-
-        avg.setText("jLabel8");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -301,7 +305,6 @@ public ArrayList<grade> getListGrade() {
         // TODO add your handling code here:
     }//GEN-LAST:event_monActionPerformed
 
-    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

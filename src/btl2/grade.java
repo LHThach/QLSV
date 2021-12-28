@@ -56,7 +56,7 @@ public class grade implements Serializable {
     }
 
     public float getAvg() {
-        avg = 1/5 *dtx+ 1/5*dgk+ 3/5*dck;
+        avg = (dtx+dgk+dck*3)/5;
         return avg;
     }
 

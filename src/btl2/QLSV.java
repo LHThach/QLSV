@@ -36,7 +36,7 @@ public final class QLSV extends javax.swing.JFrame {
     }
 
     public boolean check() {
-        if (msv.getText().equals("") || fullName.getText().equals("") || gender.getText().equals("") || dob.getText().equals("")) {
+        if (msv.getText()==" " || fullName.getText()=="" || gender.getText()=="" || dob.getText()=="") {
             JOptionPane.showMessageDialog(rootPane, "Hãy nhập đủ dữ liệu sau đó ấn Save");
             return false;
         } else {
@@ -45,6 +45,12 @@ public final class QLSV extends javax.swing.JFrame {
     }
 
     public boolean saveStudent(Student sv) {
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=QLND;user=sa;password=1");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
         String sql = "INSERT INTO SV VALUES(?,?,?,?)";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -76,15 +82,16 @@ public final class QLSV extends javax.swing.JFrame {
     public boolean updateStudent() {
         try {
             String ma = msv.getText();
-            String sql = "UPDATE Sv SET MSV = ?, HoTen = ?, GioiTinh = ?, DoB = ?";
+            String sql = "UPDATE Sv SET MSV = ?, HoTen = ?, GioiTinh = ?, DoB = ?, Khóa = ?, Lớp=?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(2, fullName.getText());
             ps.setString(3, gender.getText());
             ps.setString(4, dob.getText());
-
             ps.setString(1, msv.getText());
+            ps.setString(5, khoa.getText());
+            ps.setString(6, lop.getText());
             ps.executeUpdate();
-
+            
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -108,6 +115,10 @@ public final class QLSV extends javax.swing.JFrame {
         save = new javax.swing.JButton();
         gender = new javax.swing.JTextField();
         upDate = new javax.swing.JButton();
+        JLabel = new javax.swing.JLabel();
+        khoa = new javax.swing.JTextField();
+        Jlabel = new javax.swing.JLabel();
+        lop = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblQLSV = new javax.swing.JTable();
 
@@ -169,34 +180,46 @@ public final class QLSV extends javax.swing.JFrame {
             }
         });
 
+        JLabel.setText("Khóa");
+
+        Jlabel.setText("Lớp");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(save, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
-                        .addComponent(reset, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42)
-                        .addComponent(detele, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                        .addComponent(upDate, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(fullName, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
-                            .addComponent(msv)
-                            .addComponent(dob)
-                            .addComponent(gender, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(save, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(37, 37, 37)
+                            .addComponent(reset, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(42, 42, 42)
+                            .addComponent(detele, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                            .addComponent(upDate, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(JLabel))
+                            .addGap(18, 18, 18)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(fullName, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+                                    .addComponent(msv)
+                                    .addComponent(dob)
+                                    .addComponent(gender, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(lop, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                                    .addComponent(khoa, javax.swing.GroupLayout.Alignment.LEADING)))))
+                    .addComponent(Jlabel))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,7 +240,15 @@ public final class QLSV extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(dob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(67, 67, 67)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JLabel)
+                    .addComponent(khoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Jlabel)
+                    .addComponent(lop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(save)
                     .addComponent(reset)
@@ -228,20 +259,20 @@ public final class QLSV extends javax.swing.JFrame {
 
         tblQLSV.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "MSV", "Họ và tên", "Gender", "DoB"
+                "MSV", "Họ và tên", "Gender", "DoB", "Khóa", "Lớp"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -263,7 +294,7 @@ public final class QLSV extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -272,7 +303,7 @@ public final class QLSV extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -288,18 +319,21 @@ public final class QLSV extends javax.swing.JFrame {
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
         if (check()) {
-            Student sv = new Student();
+             Student sv = new Student();
             sv.setMsv(msv.getText());
             sv.setFullName(fullName.getText());
             sv.setGender(gender.getText());
             sv.setDob(dob.getText());
-
+            sv.setKhoa(khoa.getText());
+            sv.setLop(lop.getText());
+            
             if (saveStudent(sv)) {
                 JOptionPane.showMessageDialog(rootPane, "Lưu thành công!");
                 list.add(sv);
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Lỗi");
             }
+            
             fillTable();
         }
     }//GEN-LAST:event_saveActionPerformed
@@ -341,6 +375,8 @@ public final class QLSV extends javax.swing.JFrame {
             sv.setFullName(fullName.getText());
             sv.setGender(gender.getText());
             sv.setDob(dob.getText());
+            sv.setKhoa(khoa.getText());
+            sv.setLop(lop.getText());
             list.add(sv);
             fillTable();
             JOptionPane.showMessageDialog(this, "Update thành công!");
@@ -366,6 +402,8 @@ public final class QLSV extends javax.swing.JFrame {
                 row.add(rs.getString(2));
                 row.add(rs.getString(3));
                 row.add(rs.getString(4));
+                row.add(rs.getString(5));
+                row.add(rs.getString(6));
                 model.addRow(row);
             }
             tblQLSV.setModel(model);
@@ -379,6 +417,8 @@ public final class QLSV extends javax.swing.JFrame {
         fullName.setText(list.get(index).getFullName());
         dob.setText(list.get(index).getDob());
         gender.setText(list.get(index).getGender());
+         khoa.setText(list.get(index).getKhoa());
+        lop.setText(list.get(index).getLop());
     }
 
     public void fillTable() {
@@ -450,6 +490,8 @@ public final class QLSV extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel JLabel;
+    private javax.swing.JLabel Jlabel;
     private javax.swing.JButton detele;
     private javax.swing.JTextField dob;
     private javax.swing.JTextField fullName;
@@ -460,6 +502,8 @@ public final class QLSV extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField khoa;
+    private javax.swing.JTextField lop;
     private javax.swing.JTextField msv;
     private javax.swing.JButton reset;
     private javax.swing.JButton save;

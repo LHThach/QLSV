@@ -154,7 +154,7 @@ public class Login extends javax.swing.JFrame {
                     if (role.equals("GV")) {
                         JOptionPane.showMessageDialog(rootPane, "Đăng nhập thành công");
                         new QLĐ().setVisible(true);
-                    } else {
+                    } if(role.equals("SV")){
                         JOptionPane.showMessageDialog(rootPane, "Đăng nhập thành công");
                         new SV().setVisible(true);
                     }

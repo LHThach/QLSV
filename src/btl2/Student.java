@@ -2,7 +2,7 @@ package btl2;
 
 public class Student {
 
-    public String fullName, dob, msv, gender;
+    public String fullName, dob, msv, gender,khoa,lop;
 
     public String getMsv() {
         return msv;
@@ -36,6 +36,22 @@ public class Student {
         this.dob = dob;
     }
 
+    public String getKhoa() {
+        return khoa;
+    }
+
+    public void setKhoa(String khoa) {
+        this.khoa = khoa;
+    }
+
+    public String getLop() {
+        return lop;
+    }
+
+    public void setLop(String lop) {
+        this.lop = lop;
+    }
+
     public Student(String msv, String fullName, String gender, String dob) {
         this.msv = msv;
         this.fullName = fullName;
@@ -49,10 +65,7 @@ public class Student {
         this.dob = dob;
     }
     Student(){
-        this.msv = msv;
-        this.fullName = fullName;
-        this.gender = gender;
-        this.dob = dob;
+        
         
     }
 }
