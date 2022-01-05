@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="btl2">
+  <ClassDiagramComponents>
+    <Class name="grade" package="btl2" visibility="public" xPosition="20.0" yPosition="18.0">
+      <Fields>
+        <Field name="msv" type="String" visibility="public"/>
+        <Field name="dtx" type="float" visibility="public"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="msv"/>
+          <Argument type="String" name="fullname"/>
+          <Argument type="String" name="mon"/>
+          <Argument type="float" name="dtx"/>
+          <Argument type="float" name="dgk"/>
+          <Argument type="float" name="dck"/>
+          <Argument type="float" name="avg"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="String" name="msv"/>
+          <Argument type="String" name="mon"/>
+          <Argument type="float" name="dtx"/>
+          <Argument type="float" name="dgk"/>
+          <Argument type="float" name="dck"/>
+        </Constructor>
+        <Constructor visibility="package"/>
+      </Constructors>
+      <Methods>
+        <Method name="getMsv" returnType="String" visibility="public"/>
+        <Method name="setMsv" returnType="void" visibility="public">
+          <Argument type="String" name="msv"/>
+        </Method>
+        <Method name="getFullname" returnType="String" visibility="public"/>
+        <Method name="setFullname" returnType="void" visibility="public">
+          <Argument type="String" name="fullname"/>
+        </Method>
+        <Method name="getMon" returnType="String" visibility="public"/>
+        <Method name="setMon" returnType="void" visibility="public">
+          <Argument type="String" name="mon"/>
+        </Method>
+        <Method name="getDtx" returnType="float" visibility="public"/>
+        <Method name="setDtx" returnType="void" visibility="public">
+          <Argument type="float" name="dtx"/>
+        </Method>
+        <Method name="getDgk" returnType="float" visibility="public"/>
+        <Method name="setDgk" returnType="void" visibility="public">
+          <Argument type="float" name="dgk"/>
+        </Method>
+        <Method name="getDck" returnType="float" visibility="public"/>
+        <Method name="setDck" returnType="void" visibility="public">
+          <Argument type="float" name="dck"/>
+        </Method>
+        <Method name="getAvg" returnType="float" visibility="public"/>
+        <Method name="setAvg" returnType="void" visibility="public">
+          <Argument type="float" name="avg"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="QLSV" package="btl2" visibility="public" isFinal="true" xPosition="299.0" yPosition="502.0">
+      <Fields>
+        <Field name="list" type="ArrayList&lt;Student&gt;" visibility="package"/>
+        <Field name="model" type="DefaultTableModel" visibility="package"/>
+        <Field name="index" type="int" visibility="package"/>
+        <Field name="conn" type="Connection" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="check" returnType="boolean" visibility="public"/>
+        <Method name="saveStudent" returnType="boolean" visibility="public">
+          <Argument type="Student" name="sv"/>
+        </Method>
+        <Method name="deleteStudent" returnType="boolean" visibility="public"/>
+        <Method name="updateStudent" returnType="boolean" visibility="public"/>
+        <Method name="resetActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="saveActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="deteleActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="upDateActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="tblQLSVMouseClicked" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+        <Method name="loadDbToTable" returnType="void" visibility="public"/>
+        <Method name="showDetail" returnType="void" visibility="public">
+          <Argument type="int" name="index"/>
+        </Method>
+        <Method name="fillTable" returnType="void" visibility="public"/>
+        <Method name="getListStudent" returnType="ArrayList&lt;Student&gt;" visibility="public"/>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Student" package="btl2" visibility="public" xPosition="568.0" yPosition="18.0">
+      <Fields>
+        <Field name="fullName" type="String" visibility="public"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="msv"/>
+          <Argument type="String" name="fullName"/>
+          <Argument type="String" name="gender"/>
+          <Argument type="String" name="dob"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="String" name="fullName"/>
+          <Argument type="String" name="gender"/>
+          <Argument type="String" name="dob"/>
+        </Constructor>
+        <Constructor visibility="package"/>
+      </Constructors>
+      <Methods>
+        <Method name="getMsv" returnType="String" visibility="public"/>
+        <Method name="setMsv" returnType="void" visibility="public">
+          <Argument type="String" name="msv"/>
+        </Method>
+        <Method name="getFullName" returnType="String" visibility="public"/>
+        <Method name="setFullName" returnType="void" visibility="public">
+          <Argument type="String" name="fullName"/>
+        </Method>
+        <Method name="getGender" returnType="String" visibility="public"/>
+        <Method name="setGender" returnType="void" visibility="public">
+          <Argument type="String" name="gender"/>
+        </Method>
+        <Method name="getDob" returnType="String" visibility="public"/>
+        <Method name="setDob" returnType="void" visibility="public">
+          <Argument type="String" name="dob"/>
+        </Method>
+        <Method name="getKhoa" returnType="String" visibility="public"/>
+        <Method name="setKhoa" returnType="void" visibility="public">
+          <Argument type="String" name="khoa"/>
+        </Method>
+        <Method name="getLop" returnType="String" visibility="public"/>
+        <Method name="setLop" returnType="void" visibility="public">
+          <Argument type="String" name="lop"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="SV" package="btl2" visibility="public" xPosition="57.0" yPosition="610.0">
+      <Fields>
+        <Field name="list" type="ArrayList&lt;grade&gt;" visibility="package"/>
+        <Field name="model" type="DefaultTableModel" visibility="package"/>
+        <Field name="conn" type="Connection" visibility="private"/>
+        <Field name="index" type="int" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="loadDbToTable" returnType="void" visibility="public"/>
+        <Method name="selectItem" returnType="boolean" visibility="public"/>
+        <Method name="fillTable" returnType="void" visibility="public"/>
+        <Method name="findActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="list" source="btl2.SV" target="btl2.grade" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;grade&gt;"/>
+    <UseRelation source="btl2.QLSV" target="btl2.Student" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="list" source="btl2.QLSV" target="btl2.Student" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;Student&gt;"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
